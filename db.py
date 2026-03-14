@@ -5,6 +5,8 @@ import mysql.connector
 
 dotenv.load_dotenv()
 
+SCHEMA = os.environ.get("SCHEMA_NAME")
+
 def cnx():
     return mysql.connector.connect(
         user=os.environ.get("DB_USER"),

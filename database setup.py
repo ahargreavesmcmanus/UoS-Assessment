@@ -12,7 +12,7 @@ def main():
 
     with db.cnx() as cnx, cnx.cursor() as cursor:
         print("Create data")
-        cursor.execute("USE ecommerce")
+        cnx.database = db.SCHEMA
 
         print("\tCreate people")
         faker = Faker("en_GB")
