@@ -29,11 +29,38 @@ CREATE TABLE `customer` (
   `email` varchar(255) NOT NULL,
   `surname` varchar(255) NOT NULL,
   `firstname` varchar(255) NOT NULL,
-  `status` enum('active','archived','suspended') NOT NULL DEFAULT 'active',
+  `status` tinyint NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=251 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  UNIQUE KEY `email_UNIQUE` (`email`),
+  KEY `fk_customer_customer_status_idx` (`status`),
+  CONSTRAINT `fk_customer_customer_status` FOREIGN KEY (`status`) REFERENCES `customer_status` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `customer_status`
+--
+
+DROP TABLE IF EXISTS `customer_status`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `customer_status` (
+  `id` tinyint NOT NULL AUTO_INCREMENT,
+  `status` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `status_UNIQUE` (`status`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `customer_status`
+--
+
+LOCK TABLES `customer_status` WRITE;
+/*!40000 ALTER TABLE `customer_status` DISABLE KEYS */;
+INSERT INTO `customer_status` VALUES (1,'active'),(2,'archived'),(3,'suspended');
+/*!40000 ALTER TABLE `customer_status` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `order`
@@ -68,7 +95,7 @@ CREATE TABLE `product` (
   `name` varchar(45) NOT NULL,
   `unit_price` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

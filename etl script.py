@@ -14,13 +14,14 @@ def extract():
                    email,
                    surname,
                    firstname,
-                   status,
+                   customer_status.status,
                    `order`.id   AS order_id,
                    product.name AS product,
                    product.unit_price,
                    `order`.quantity,
                    `order`.timestamp
             FROM customer
+                     INNER JOIN customer_status ON customer_status.id = customer.status
                      LEFT JOIN (`order` INNER JOIN product ON product.id = `order`.product)
                                ON `order`.customer = customer.id
             ORDER BY customer.id
@@ -32,7 +33,8 @@ def extract():
 def transform(columns: list[str], rows: list):
     df = pd.DataFrame(columns=columns, data=rows)
     df["name"] = df["firstname"] + " " + df["surname"]
-    df["value"] = df.apply(lambda row: row["unit_price"] * row["quantity"] if pd.notna(row["quantity"]) else None, axis=1)
+    df["value"] = df.apply(lambda row: row["unit_price"] * row["quantity"] if pd.notna(row["quantity"]) else None,
+                           axis=1)
     return df
 
 
