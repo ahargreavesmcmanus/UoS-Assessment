@@ -18,7 +18,11 @@ Currency amounts are stored in pence to ensure no precision issues from using de
 
 For unique identifiers, I used integers with auto increment. This is simple and efficient. However, if records were being created by distributed systems or if there were security concerns about sequential identifiers, UUID could be used instead.
 
-For customer status, for simplicity, I decided to use an ENUM column. However, in a more complicated situation I would usually choose to use a reference table.
+#### Record creation
+I decided to use the Faker library as I have used a similar library before and it creates realistic data randomly.
+
+### ETL
+I decided to use the pandas library as I have experience using it for ETL and it is effective for such operations.
 
 
 ## Application flow
@@ -27,3 +31,5 @@ For customer status, for simplicity, I decided to use an ENUM column. However, i
 
 ## Improvements
 <!-- TODO -->
+
+My ETL script loads all records from the database into memory. If there were much larger number of records, this could be a problem and I instead iterate through the records or work in chunks instead of performing three distinct steps on the whole dataset. For these simple transformations, I would also consider doing them in the SQL query itself.
