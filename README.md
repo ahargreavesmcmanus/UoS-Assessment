@@ -16,7 +16,7 @@ To run the database setup (create tables and mock data), execute `$ python datab
 
 To run the ETL script, execute `$python etl script.py`.
 
-To run the FastAPI instance, run `$ fastapi run` from the command line. See [FastAPI CLI documentation](https://fastapi.tiangolo.com/fastapi-cli/) for more details.
+To run the FastAPI instance, run `$ fastapi run` from the command line. See [FastAPI CLI documentation](https://fastapi.tiangolo.com/fastapi-cli/) for more details. The API is self documenting; documentation can be found at <http://127.0.0.1:8000/docs>
 
 ## Choices and reasoning
 ### Database
@@ -41,7 +41,7 @@ I decided to use the Faker library as I have used a similar library before and i
 I decided to use the pandas library as I have experience using it for ETL and found it useful.
 
 ### API
-I decided to use the FastAPI library as I have some exposure of it in a production environment and it simplifies creation of a functional API, including by providing HTTP, serialisation etc.
+I decided to use the FastAPI library as I have some exposure of it in a production environment and it simplifies creation of a functional API, including by providing HTTP, serialisation etc. This proved to be more complicated than anticipated; if I was doing this again I would investigate other options more thoroughly.
 
 ## Application data flow
 1. The database setup script inserts data. 
@@ -52,4 +52,6 @@ I decided to use the FastAPI library as I have some exposure of it in a producti
 ## Improvements
 My ETL script loads all records from the database into memory. If there were much larger number of records, this could be a problem and I instead iterate through the records or work in chunks instead of performing three distinct steps on the whole dataset. For these simple transformations, I would also consider doing them in the SQL query itself.
 
-With more time, I would like to expand the API to allow creating, updating and deleting records. I would also include options for searching and pagination. Finally, I would implement some kind of authentication. 
+With more time, I would like to expand the API to allow creating, updating and deleting records. I would also include options for searching and pagination. Finally, I would implement some kind of authentication.
+
+Finally, I would create a test suite for each part including unit tests and HTTP requests to the API.
