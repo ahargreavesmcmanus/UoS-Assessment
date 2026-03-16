@@ -4,7 +4,7 @@ import db
 from faker import Faker
 from random import randint, choice
 
-RECORD_COUNT = 50
+RECORD_COUNT = 50  # How many fake records per table to create
 
 def main():
     with db.cnx() as cnx, open("schema.sql") as schema:

@@ -1,3 +1,6 @@
+--
+-- MySQL database schema
+--
 SET character_set_client = utf8mb4;
 CREATE DATABASE  IF NOT EXISTS `ecommerce`DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 USE `ecommerce`;
@@ -27,6 +30,7 @@ CREATE TABLE `customer_status` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `status_UNIQUE` (`status`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+-- Seed values
 LOCK TABLES `customer_status` WRITE;
 ALTER TABLE `customer_status` DISABLE KEYS;
 INSERT INTO `customer_status` VALUES (1,'active'),(2,'archived'),(3,'suspended');

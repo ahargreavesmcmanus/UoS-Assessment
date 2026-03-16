@@ -2,6 +2,8 @@
 import os
 import dotenv
 import mysql.connector
+from mysql.connector.abstracts import MySQLConnectionAbstract
+from mysql.connector.pooling import PooledMySQLConnection
 
 dotenv.load_dotenv()
 
@@ -17,7 +19,11 @@ def get_port() -> int:
     return int(os.environ.get("DB_PORT"))
 
 
-def cnx():
+def cnx() -> PooledMySQLConnection | MySQLConnectionAbstract:
+    """
+    Create and return a MySQL connection
+    :return:
+    """
     return mysql.connector.connect(
         user=get_user(),
         password=get_password(),
