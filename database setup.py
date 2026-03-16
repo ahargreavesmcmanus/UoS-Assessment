@@ -47,7 +47,7 @@ def main():
             (choice(customer_ids), choice(product_ids), randint(1,100)) for _ in range(RECORD_COUNT)
         ]
         cursor.executemany(
-            "INSERT INTO `order` (customer, product, quantity) VALUES (%s, %s, %s)", orders
+            "INSERT INTO `order` (customer_id, product_id, quantity) VALUES (%s, %s, %s)", orders
         )
         cnx.commit()
 

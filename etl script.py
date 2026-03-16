@@ -21,9 +21,9 @@ def extract():
                    `order`.quantity,
                    `order`.timestamp
             FROM customer
-                     INNER JOIN customer_status ON customer_status.id = customer.status
-                     LEFT JOIN (`order` INNER JOIN product ON product.id = `order`.product)
-                               ON `order`.customer = customer.id
+                     INNER JOIN customer_status ON customer_status.id = customer.status_id
+                     LEFT JOIN (`order` INNER JOIN product ON product.id = `order`.product_id)
+                               ON `order`.customer_id = customer.id
             ORDER BY customer.id
             """
         )
