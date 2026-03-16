@@ -34,6 +34,8 @@ Currency amounts are stored in pence to ensure no precision issues from using de
 
 For unique identifiers, I used integers with auto increment. This is simple and efficient. However, if records were being created by distributed systems or if there were security concerns about sequential identifiers, UUID could be used instead.
 
+See attached [ER diagram](ER%20diagram.png).
+
 #### Record creation
 I decided to use the Faker library as I have used a similar library before and it creates realistic data randomly.
 
@@ -48,6 +50,7 @@ I decided to use the FastAPI library as I have some exposure of it in a producti
 2. The API retrieves data and serialises it into JSON for HTTP responses to requests.
 3. The ETL script takes the data and transforms it before encoding it and saving it as CSV.
 
+![Data flow](Data%20flow.png)
 
 ## Improvements
 My ETL script loads all records from the database into memory. If there were much larger number of records, this could be a problem and I instead iterate through the records or work in chunks instead of performing three distinct steps on the whole dataset. For these simple transformations, I would also consider doing them in the SQL query itself.
