@@ -1,8 +1,11 @@
 # ETL script
 import datetime
+import os
 
 import db
 import pandas as pd
+
+OUTPUT_DIRECTORY = "output"
 
 
 def extract():
@@ -32,7 +35,7 @@ def extract():
 
 def transform(columns: list[str], rows: list):
     df = pd.DataFrame(columns=columns, data=rows)
-    df["name"] = df["firstname"] + " " + df["surname"]
+    df["name"] = df.apply(lambda row: row["firstname"] + " " + row["surname"], axis=1)
     df["value"] = df.apply(lambda row: row["unit_price"] * row["quantity"] if pd.notna(row["quantity"]) else None,
                            axis=1)
     return df
@@ -40,8 +43,10 @@ def transform(columns: list[str], rows: list):
 
 def load(df):
     filename = datetime.datetime.now().strftime("%Y-%m-%dT%H-%M-%S") + ".csv"
-    with open("output/" + filename, "xb") as file:
+    filepath = os.path.join(os.path.dirname(__file__), OUTPUT_DIRECTORY, filename)
+    with open(filepath, "xb") as file:
         df.to_csv(file, index=False)
+    print("Saved to", filepath)
 
 
 def main():
