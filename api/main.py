@@ -29,14 +29,21 @@ class CustomerStatus(SQLModel, table=True):
     id: int|None = Field(primary_key=True)
     status: str
 
-class Customer(SQLModel, table=True):
-    id: int|None = Field(primary_key=True)
+class CustomerBase(SQLModel):
     email: str = Field(index=True, unique=True)
     surname: str
     firstname: str
     status_id: int = Field(foreign_key="customer_status.id")
+    # status: CustomerStatus = Relationship(back_populates="customer")
+
+class Customer(CustomerBase, table=True):
+    id: int|None = Field(primary_key=True)
+    orders: list[Order] = Relationship(back_populates="customer")
+
+class CustomerResponse(CustomerBase):
+    id: int
     # status: CustomerStatus
-    orders: list[Order]|None = Relationship(back_populates="customer")
+    orders: list[Order] = []
 
 
 url_object = URL.create(
@@ -67,7 +74,7 @@ def read_root():
 def read_customer(
         session: SessionDep,
         customer_id: int,
-    ) -> Customer:
+    ) -> CustomerResponse:
     customer = session.get(Customer, customer_id)
     if not customer:
         raise HTTPException(status_code=404, detail="Customer not found")
