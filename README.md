@@ -14,7 +14,7 @@ This will require the [virtual environment](https://docs.python.org/3/library/ve
 
 To run the database setup (create tables and mock data), execute `$ python database setup.py`.
 
-To run the ETL script, execute `$python etl script.py`.
+To run the ETL script, execute `$ python etl script.py`.
 
 To run the FastAPI instance, run `$ fastapi run` from the command line. See [FastAPI CLI documentation](https://fastapi.tiangolo.com/fastapi-cli/) for more details. The API is self documenting; documentation can be found at <http://127.0.0.1:8000/docs>
 
