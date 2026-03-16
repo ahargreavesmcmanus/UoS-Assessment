@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # Create database tables and fake data
 import db
 from faker import Faker
