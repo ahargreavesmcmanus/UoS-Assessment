@@ -1,5 +1,19 @@
 # UoS-Assessment
 ## Usage
+### Requirements
+* Python 3 (developed with 3.14)
+  * Required packages in `requirements.txt`
+* MySQL Server (developed with 8.4.8)
+  * Requires account with privileges to create schema and tables and to CRUD data.
+
+### Configuration
+Can be configured with environment variables or .env in the project root.
+
+### Running
+To run the database setup (create tables and mock data), execute `database setup.py`.
+
+To run the ETL script, execute `etl script.py`.
+
 <!-- TODO -->
 
 ## Choices and reasoning
